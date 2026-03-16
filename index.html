@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enter the Brain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Space+Grotesk&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #F2EDE4;
+    }
+
+    /* ── First-click unlock overlay ── */
+    #unlock-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      cursor: pointer;
+      background: transparent;
+    }
+
+
+    /* ── Landing Page ── */
+    #landing {
+      position: fixed;
+      inset: 0;
+      background-color: #F2EDE4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    #brain-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #F2EDE4;
+      position: relative;
+    }
+
+    #brain-img {
+      width: min(920px, 85vw);
+      cursor: pointer;
+      animation: pulse 2.8s ease-in-out infinite;
+      animation-play-state: running;
+      user-select: none;
+      mix-blend-mode: multiply;
+      display: block;
+      /* glow grows via JS inline filter during charge sequence */
+    }
+
+    @keyframes pulse {
+      0%   { transform: scale(1);    }
+      50%  { transform: scale(1.04); }
+      100% { transform: scale(1);    }
+    }
+
+    /* hover overlay via pseudo element — does not affect animation */
+    #brain-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    #brain-wrap:hover::after {
+      opacity: 0.12;
+    }
+
+    /* ── Enter text wrapper ── */
+    #enter-text-wrap {
+      position: relative;
+      margin-top: -80px;
+      display: inline-block;
+      cursor: pointer;
+      width: 420px;
+      max-width: 80vw;
+    }
+
+    /* ── Both enter text images same size same position ── */
+    #enter-text,
+    #enter-text-on {
+      width: 100%;
+      display: block;
+      user-select: none;
+    }
+
+    #enter-text-on {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+
+    /* ── White fade layer ── */
+    #white-fade {
+      position: fixed;
+      inset: 0;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 60;
+      transition: opacity 0.5s ease;
+    }
+
+    #white-fade.fade-in {
+      opacity: 1;
+    }
+
+    /* ── Video Overlay ── */
+    #video-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: #F2EDE4;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    #video-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #explode-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top center;
+      mix-blend-mode: multiply;
+      transform: scale(0.9);
+      transform-origin: top center;
+    }
+
+    #watermark-cover {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 80px;
+      background-color: #F2EDE4;
+      pointer-events: none;
+    }
+
+    /* ── Fade curtain ── */
+    #fade-curtain {
+      position: fixed;
+      inset: 0;
+      background: #F2EDE4;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 100;
+      transition: opacity 0.9s ease;
+    }
+
+    #fade-curtain.fade-in {
+      opacity: 1;
+    }
+
+    /* ── Page 2 ── */
+    #page2 {
+      position: fixed;
+      inset: 0;
+      background: #F2EDE4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+      transition: opacity 0.8s ease;
+    }
+
+    #page2.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #page2 h1 {
+      font-family: 'Caprasimo', cursive;
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: #2C3B2D;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background audio -->
+  <audio id="bg-audio" src="audio/audio cut_nQx9r5CJ.mp3" loop preload="auto" volume="0.3"></audio>
+
+  <!-- Invisible first-click unlock overlay -->
+  <div id="unlock-overlay"></div>
+
+<!-- Landing -->
+  <div id="landing">
+    <div id="brain-wrap">
+      <img id="brain-img" src="images/lego_brain_white_bg.png" alt="LEGO Brain" />
+    </div>
+    <div id="enter-text-wrap">
+      <img id="enter-text" src="images/enter_text_earthy_final.png" alt="Click to Enter the Brain" />
+      <img id="enter-text-on" src="images/enter_text_earthy_final-blink.png" alt="" />
+    </div>
+  </div>
+
+  <!-- White fade layer -->
+  <div id="white-fade"></div>
+
+  <!-- Video overlay -->
+  <div id="video-overlay">
+    <video id="explode-video" src="images/kling_LEGO_brain.mp4" preload="auto" muted playsinline></video>
+    <div id="watermark-cover"></div>
+  </div>
+
+  <!-- Fade curtain -->
+  <div id="fade-curtain"></div>
+
+  <!-- Page 2 -->
+  <div id="page2">
+    <h1>Coming Soon</h1>
+  </div>
+
+  <script>
+    const landing       = document.getElementById('landing');
+    const brainImg      = document.getElementById('brain-img');
+    const enterText     = document.getElementById('enter-text-wrap');
+    const overlay       = document.getElementById('video-overlay');
+    const video         = document.getElementById('explode-video');
+    const curtain       = document.getElementById('fade-curtain');
+    const page2         = document.getElementById('page2');
+    const bgAudio       = document.getElementById('bg-audio');
+const unlockOverlay = document.getElementById('unlock-overlay');
+    const whiteFade     = document.getElementById('white-fade');
+
+    let triggered     = false;
+    let audioUnlocked = false;
+
+    // ── Unlock audio on very first click ──
+    unlockOverlay.addEventListener('click', () => {
+      if (audioUnlocked) return;
+      audioUnlocked = true;
+      bgAudio.volume = 0.3;
+      bgAudio.play().catch(() => {});
+      unlockOverlay.remove();
+    }, { once: true });
+
+    // ── Audio fade via setInterval (100ms steps over 4 seconds) ──
+    function fadeOutAudio() {
+      const steps    = 40; // 4000ms / 100ms
+      const startVol = bgAudio.volume;
+      let   tick     = 0;
+      const id = setInterval(() => {
+        tick++;
+        bgAudio.volume = Math.max(0, startVol * (1 - tick / steps));
+        if (tick >= steps) {
+          clearInterval(id);
+          bgAudio.pause();
+          bgAudio.volume = 0.3;
+        }
+      }, 100);
+    }
+
+    // ── Glow build using rAF over durationMs ──
+    function buildGlow(durationMs, onComplete) {
+      const start = performance.now();
+      function step(now) {
+        const t = Math.min((now - start) / durationMs, 1);
+        // ease-in curve: t^2
+        const eased = t * t;
+        const blur   = eased * 40;  // 0 → 40px
+        const spread = eased * 20;  // 0 → 20px
+        const alpha  = eased * 0.8; // 0 → 0.8 opacity
+        brainImg.style.filter = `drop-shadow(0 0 ${blur}px rgba(44,59,45,${alpha})) drop-shadow(0 0 ${spread}px rgba(44,59,45,${alpha * 0.5}))`;
+        if (t < 1) {
+          requestAnimationFrame(step);
+        } else {
+          onComplete && onComplete();
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ── Main click sequence ──
+    function triggerSequence() {
+      if (triggered) return;
+      triggered = true;
+
+      // Unlock audio if brain/text clicked before first-click overlay removed
+      if (!audioUnlocked) {
+        audioUnlocked = true;
+        bgAudio.play().catch(() => {});
+        if (unlockOverlay.parentNode) unlockOverlay.remove();
+      }
+
+      // 1. Fire explosion SFX after 800ms delay for cinematic timing
+      setTimeout(() => {
+        const sfx = new Audio('audio/kling-lego-brain_kIrNfXff.mp3');
+        sfx.volume = 1.0;
+        sfx.play().catch(() => {});
+      }, 800);
+
+      // 2. Show video overlay, hide landing, start video — same tick
+      landing.style.opacity = '0';
+      landing.style.pointerEvents = 'none';
+      overlay.style.opacity = '1';
+      overlay.classList.add('active');
+      video.play().catch(() => transitionToPage2());
+
+      // 3. Fade background music out over 4s via setInterval
+      fadeOutAudio();
+
+      // 3. Build glow simultaneously (visual flourish, doesn't block anything)
+      buildGlow(1500, null);
+    }
+
+    function transitionToPage2() {
+      curtain.classList.add('fade-in');
+
+      curtain.addEventListener('transitionend', () => {
+        overlay.classList.remove('active');
+        overlay.style.pointerEvents = 'none';
+        video.pause();
+
+        window.location.href = 'homepage.html';
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            curtain.classList.remove('fade-in');
+          });
+        });
+      }, { once: true });
+    }
+
+    video.addEventListener('ended', transitionToPage2);
+
+    const enterTextOn  = document.getElementById('enter-text-on');
+    const enterTextImg = document.getElementById('enter-text');
+
+    // Hover brightness on the wrapper
+    const enterWrap = document.getElementById('enter-text-wrap');
+    enterWrap.addEventListener('mouseover', () => { enterWrap.style.filter = 'brightness(1.3)'; });
+    enterWrap.addEventListener('mouseout',  () => { enterWrap.style.filter = 'brightness(1)'; });
+
+    // ── Organic bulb flicker — toggles lights-on image opacity ──
+    let flickerTimeout;
+
+    function setOn()  { enterTextOn.style.opacity = '1'; }
+    function setOff() { enterTextOn.style.opacity = '0'; }
+
+    function scheduleFlicker() {
+      const rand = Math.random();
+      if (rand < 0.15) {
+        // Double flicker: off → on → off → on
+        const off1 = 50  + Math.random() * 100;
+        const on1  = 40  + Math.random() * 60;
+        const off2 = 50  + Math.random() * 100;
+        setOff();
+        flickerTimeout = setTimeout(() => {
+          setOn();
+          flickerTimeout = setTimeout(() => {
+            setOff();
+            flickerTimeout = setTimeout(() => {
+              setOn();
+              flickerTimeout = setTimeout(scheduleFlicker, 300 + Math.random() * 600);
+            }, off2);
+          }, on1);
+        }, off1);
+      } else if (rand < 0.35) {
+        // Long struggle: stays off longer
+        const offLong = 400 + Math.random() * 200;
+        setOff();
+        flickerTimeout = setTimeout(() => {
+          setOn();
+          flickerTimeout = setTimeout(scheduleFlicker, 200 + Math.random() * 500);
+        }, offLong);
+      } else {
+        // Normal quick flicker off then back on
+        const off = 50 + Math.random() * 100;
+        setOff();
+        flickerTimeout = setTimeout(() => {
+          setOn();
+          flickerTimeout = setTimeout(scheduleFlicker, 200 + Math.random() * 800);
+        }, off);
+      }
+    }
+
+    // Start with lights on, begin flickering after short delay
+    setOn();
+    flickerTimeout = setTimeout(scheduleFlicker, 500 + Math.random() * 1000);
+
+    brainImg.addEventListener('click', triggerSequence);
+    enterText.addEventListener('click', triggerSequence);
+  </script>
+
+</body>
+</html>

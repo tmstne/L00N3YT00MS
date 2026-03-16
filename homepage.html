@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design as Craft & Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --linen:   #F2EDE4;
+      --charcoal:#2A2A28;
+      --green:   #2C3B2D;
+      --corten:  #C4724A;
+      --beige:   #E8DCC8;
+      --moss:    #7A9E5C;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--linen); color: var(--charcoal); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+
+    /* ═══════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: var(--beige);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(242,237,228,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--beige); }
+
+    .nav-contact {
+      background: var(--beige);
+      color: var(--charcoal) !important;
+      padding: 6px 18px;
+      border-radius: 2px;
+      font-weight: 600 !important;
+    }
+
+    .nav-contact:hover { background: var(--corten); color: var(--beige) !important; }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 60px);
+    }
+
+    .hero-left {
+      background: var(--charcoal);
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/homepage_lego_pattern_001.png');
+      background-size: 300px;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--moss);
+      font-weight: 500;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.2rem, 5.5vw, 6rem);
+      line-height: 1.05;
+      color: var(--beige);
+      letter-spacing: -0.01em;
+      margin-top: 24px;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--corten);
+    }
+
+    .hero-sub {
+      margin-top: 32px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(232,220,200,0.55);
+      max-width: 380px;
+      font-weight: 300;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .btn-primary {
+      background: var(--corten);
+      color: var(--beige);
+      padding: 12px 28px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #a85d38; }
+
+    .btn-ghost {
+      border: 1px solid rgba(232,220,200,0.3);
+      color: rgba(232,220,200,0.7);
+      padding: 12px 28px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--beige); color: var(--beige); }
+
+    .hero-bottom-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--beige);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(232,220,200,0.4);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right img.hero-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .hero-headline-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .hero-left-brain {
+      width: clamp(120px, 18vw, 220px);
+      mix-blend-mode: normal;
+      opacity: 1;
+      pointer-events: none;
+      flex-shrink: 0;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-brain-float {
+      position: absolute;
+      bottom: 32px;
+      right: 32px;
+      width: 160px;
+      mix-blend-mode: multiply;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    /* ═══════════════════════════════════════
+       TICKER
+    ═══════════════════════════════════════ */
+    .ticker {
+      background: var(--green);
+      overflow: hidden;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      border-top: 2px solid rgba(122,158,92,0.3);
+      border-bottom: 2px solid rgba(0,0,0,0.15);
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      animation: ticker-scroll 28s linear infinite;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    .ticker-item {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(232,220,200,0.85);
+      padding: 0 48px;
+      flex-shrink: 0;
+    }
+
+    .ticker-dot {
+      color: var(--moss);
+      padding: 0;
+    }
+
+    @keyframes ticker-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ═══════════════════════════════════════
+       DISCIPLINES
+    ═══════════════════════════════════════ */
+    .disciplines {
+      background: var(--linen);
+      padding: 100px 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 60px;
+      border-bottom: 1px solid rgba(42,42,40,0.12);
+      padding-bottom: 20px;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--corten);
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      letter-spacing: -0.01em;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--beige);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.2,0,0,1), box-shadow 0.3s;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(42,42,40,0.16);
+    }
+
+    .card-texture {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/homepage_lego_pattern_001.png');
+      background-size: 180px;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .card-body {
+      padding: 32px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      line-height: 1;
+      color: rgba(42,42,40,0.12);
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.2;
+      margin-top: auto;
+      padding-top: 48px;
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      color: rgba(42,42,40,0.55);
+      line-height: 1.6;
+      margin-top: 10px;
+      font-weight: 300;
+    }
+
+    .card-arrow {
+      font-size: 1.1rem;
+      color: rgba(42,42,40,0.3);
+      margin-top: 24px;
+      transition: color 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .card:hover .card-arrow { color: var(--charcoal); transform: translateX(4px); }
+
+    .card-accent {
+      height: 4px;
+      width: 100%;
+    }
+
+    .card:nth-child(1) .card-accent { background: var(--green); }
+    .card:nth-child(2) .card-accent { background: var(--corten); }
+    .card:nth-child(3) .card-accent { background: var(--moss); }
+    .card:nth-child(4) .card-accent { background: #5A8A9F; }
+
+    .card:nth-child(1):hover .card-num { color: rgba(44,59,45,0.15); }
+    .card:nth-child(2):hover .card-num { color: rgba(196,114,74,0.15); }
+    .card:nth-child(3):hover .card-num { color: rgba(122,158,92,0.15); }
+    .card:nth-child(4):hover .card-num { color: rgba(90,138,159,0.15); }
+
+    /* ═══════════════════════════════════════
+       FEATURED
+    ═══════════════════════════════════════ */
+    .featured {
+      background: var(--charcoal);
+      padding: 100px 48px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .featured-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      line-height: 1.15;
+      color: var(--beige);
+      letter-spacing: -0.01em;
+    }
+
+    .featured-quote em {
+      color: var(--corten);
+      font-style: normal;
+    }
+
+    .featured-meta {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .featured-meta-line {
+      width: 40px;
+      height: 1px;
+      background: var(--moss);
+    }
+
+    .featured-meta-text {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(232,220,200,0.4);
+    }
+
+    .featured-card {
+      background: var(--green);
+      border-radius: 4px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/homepage_lego_pattern_001.png');
+      background-size: 160px;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    .featured-card-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--moss);
+      font-weight: 500;
+    }
+
+    .featured-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--beige);
+      line-height: 1.2;
+      margin-top: 16px;
+    }
+
+    .featured-card-desc {
+      font-size: 0.8rem;
+      color: rgba(232,220,200,0.55);
+      line-height: 1.65;
+      margin-top: 16px;
+      font-weight: 300;
+    }
+
+    .featured-card-cta {
+      display: inline-block;
+      margin-top: 28px;
+      background: var(--corten);
+      color: var(--beige);
+      padding: 10px 22px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .featured-card-cta:hover { background: #a85d38; }
+
+    /* ═══════════════════════════════════════
+       PATTERN DIVIDER
+    ═══════════════════════════════════════ */
+    .pattern-divider {
+      height: 120px;
+      background-image: url('images/homepage_lego_pattern_001.png');
+      background-size: 200px;
+      background-repeat: repeat;
+      opacity: 0.15;
+      mix-blend-mode: multiply;
+    }
+
+    /* ═══════════════════════════════════════
+       ABOUT STRIP
+    ═══════════════════════════════════════ */
+    .about-strip {
+      background: var(--linen);
+      padding: 80px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--corten);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .about-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--charcoal);
+    }
+
+    .about-text h2 em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .about-text p {
+      margin-top: 24px;
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(42,42,40,0.6);
+      font-weight: 300;
+      max-width: 440px;
+    }
+
+    .about-brain {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-brain img {
+      width: min(340px, 90%);
+      mix-blend-mode: multiply;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer {
+      background: var(--charcoal);
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--beige);
+      font-weight: 400;
+    }
+
+    .footer-built {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: rgba(232,220,200,0.35);
+      text-align: center;
+    }
+
+    .footer-location {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,220,200,0.4);
+    }
+
+    .footer-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--moss);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--moss);
+      animation: pulse-dot 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--moss); }
+      50%       { opacity: 0.5; box-shadow: 0 0 2px var(--moss); }
+    }
+
+    /* ═══════════════════════════════════════
+       GALLERY
+    ═══════════════════════════════════════ */
+    .gallery {
+      background: var(--linen);
+      padding: 100px 48px;
+    }
+
+    .gallery-grid {
+      columns: 3;
+      column-gap: 16px;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      overflow: hidden;
+      border-radius: 3px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.2,0,0,1);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(1) brightness(0.8);
+      transition: filter 0.5s cubic-bezier(0.2,0,0,1);
+    }
+
+    .card:hover .card-img {
+      filter: grayscale(0.2) sepia(0.6) hue-rotate(60deg) saturate(1.2) brightness(0.75);
+    }
+
+    .card-img-placeholder {
+      width: 100%;
+      height: 160px;
+      background: rgba(42,42,40,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-img-placeholder span {
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(42,42,40,0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="homepage.html">Work</a></li>
+      <li><a href="architecture.html">Architecture</a></li>
+      <li><a href="graphics.html">Graphics</a></li>
+      <li><a href="apparel.html">Apparel</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="cooking.html">Cooking</a></li>
+      <li><a href="downloads.html">Downloads</a></li>
+      <li><a href="#" class="nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div>
+        <p class="hero-eyebrow">Portfolio · Atlanta GA · Open to Collaboration</p>
+        <div class="hero-headline-wrap">
+          <h1 class="hero-headline">Design as<br><em>craft</em><br>&amp; code.</h1>
+          <img class="hero-left-brain" src="images/lego_brain_white_bg.png" alt="" aria-hidden="true" />
+        </div>
+        <p class="hero-sub">Architecture, graphic identity, apparel, and digital tools — built with intention from first sketch to final file.</p>
+        <div class="hero-cta-row">
+          <a href="#gallery" class="btn-primary">View Work</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">MULTI</span>
+          <span class="hero-stat-label">Disciplined</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">ATL</span>
+          <span class="hero-stat-label">Based</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img class="hero-bg" src="images/homepage_hero_001.png" alt="Designer's desk" />
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <!-- duplicated for seamless loop -->
+      <span class="ticker-item">Architecture</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">Graphic Design</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">T-Shirt &amp; Apparel</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">Claude Tools</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">Atlanta GA</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">Open to Collaboration</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">Architecture</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">Graphic Design</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">T-Shirt &amp; Apparel</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">Claude Tools</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">Atlanta GA</span><span class="ticker-item ticker-dot">·</span>
+      <span class="ticker-item">Open to Collaboration</span><span class="ticker-item ticker-dot">·</span>
+    </div>
+  </div>
+
+  <!-- DISCIPLINES -->
+  <section class="disciplines">
+    <div class="section-header">
+      <span class="section-label">What I do</span>
+      <h2 class="section-title">Disciplines</h2>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-texture"></div>
+        <img class="card-img" src="images/arch/AMBANI -C1.png" alt="Architecture" />
+        <div class="card-body">
+          <span class="card-num">01</span>
+          <div>
+            <h3 class="card-title">Architecture</h3>
+            <p class="card-desc">Spatial design, concept development, and construction documentation from schematic through build.</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-texture"></div>
+        <div class="card-img-placeholder"><span>Graphics</span></div>
+        <div class="card-body">
+          <span class="card-num">02</span>
+          <div>
+            <h3 class="card-title">Graphic Design</h3>
+            <p class="card-desc">Brand identity, editorial layout, typography, and visual systems built for longevity.</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-texture"></div>
+        <div class="card-img-placeholder"><span>Apparel</span></div>
+        <div class="card-body">
+          <span class="card-num">03</span>
+          <div>
+            <h3 class="card-title">Apparel</h3>
+            <p class="card-desc">Original t-shirt graphics and wearable design where illustration meets street-level culture.</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-texture"></div>
+        <div class="card-img-placeholder"><span>Downloads</span></div>
+        <div class="card-body">
+          <span class="card-num">04</span>
+          <div>
+            <h3 class="card-title">Downloads</h3>
+            <p class="card-desc">Fonts, templates, Claude tools, and digital assets available for immediate use.</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="featured">
+    <div class="featured-left">
+      <p class="featured-quote">"Recent work in <em>architecture</em> and visual identity."</p>
+      <div class="featured-meta">
+        <div class="featured-meta-line"></div>
+        <span class="featured-meta-text">Selected projects · 2024–2025</span>
+      </div>
+    </div>
+    <div class="featured-card">
+      <p class="featured-card-label">Free Resources</p>
+      <h3 class="featured-card-title">Downloads &amp; Tools</h3>
+      <p class="featured-card-desc">Fonts, Claude prompt packs, Illustrator templates, and digital assets — free to download and use.</p>
+      <a href="#" class="featured-card-cta">Browse Downloads</a>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="section-header">
+      <span class="section-label">All Work</span>
+      <h2 class="section-title">Gallery</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/arch/04676_000_N436_medium.jpg" alt="04676_000_N436_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N455_medium.jpg" alt="04676_000_N455_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N461_medium.jpg" alt="04676_000_N461_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N473_medium.jpg" alt="04676_000_N473_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N476_medium.jpg" alt="04676_000_N476_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N493_medium.jpg" alt="04676_000_N493_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N185_medium.jpg" alt="04750_000_N185_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N186_medium.jpg" alt="04750_000_N186_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N187_medium.jpg" alt="04750_000_N187_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N188_medium.jpg" alt="04750_000_N188_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N190_medium.jpg" alt="04750_000_N190_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N103_medium.jpg" alt="05216_000_N103_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N68_medium.jpg" alt="05216_000_N68_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N69_medium.jpg" alt="05216_000_N69_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N86_medium.jpg" alt="05216_000_N86_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N91_medium.jpg" alt="05216_000_N91_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N99_medium.jpg" alt="05216_000_N99_medium" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/AMBANI -C1.png" alt="AMBANI -C1" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/AMBANI -C4.png" alt="AMBANI -C4" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/AMBANI -C5.png" alt="AMBANI -C5" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- PATTERN DIVIDER -->
+  <div class="pattern-divider" aria-hidden="true"></div>
+
+  <!-- ABOUT STRIP -->
+  <section class="about-strip">
+    <div class="about-text">
+      <p class="about-text-label">About</p>
+      <h2>Trained in <em>architecture</em>,<br>fluent in design.</h2>
+      <p>I work across disciplines — designing buildings by day, building digital tools by night. Based in Atlanta. Obsessed with craft, materials, and the intersection of analog thinking and digital making.</p>
+    </div>
+    <div class="about-brain">
+      <img src="images/lego_brain_white_bg.png" alt="LEGO Brain" />
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo"></span>
+    <span class="footer-built">Built with Claude Code &amp; curiosity</span>
+    <div class="footer-location">
+      <span class="footer-dot"></span>
+      <span>Atlanta, GA</span>
+    </div>
+  </footer>
+
+</body>
+</html>

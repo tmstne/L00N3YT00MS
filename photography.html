@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --linen:   #F2EDE4;
+      --charcoal:#2A2A28;
+      --green:   #2C3B2D;
+      --corten:  #C4724A;
+      --beige:   #E8DCC8;
+      --moss:    #7A9E5C;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--linen); color: var(--charcoal); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--charcoal);
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 48px; height: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(242,237,228,0.65); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--beige); }
+    .nav-contact {
+      background: var(--beige); color: var(--charcoal) !important;
+      padding: 6px 18px; border-radius: 2px; font-weight: 600 !important;
+    }
+    .nav-contact:hover { background: var(--corten); color: var(--beige) !important; }
+    .page-hero {
+      background: var(--charcoal); padding: 80px 48px 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .page-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--moss);
+      font-weight: 500; margin-bottom: 16px;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-size: clamp(3rem, 6vw, 6rem);
+      line-height: 1.05; color: var(--beige); letter-spacing: -0.01em;
+    }
+    .page-title em { font-style: italic; color: var(--corten); }
+    .page-desc {
+      margin-top: 24px; font-size: 0.88rem; line-height: 1.75;
+      color: rgba(232,220,200,0.55); max-width: 480px; font-weight: 300;
+    }
+    .gallery-section { padding: 80px 48px; background: var(--linen); }
+    .placeholder-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .placeholder-card {
+      background: var(--beige); border-radius: 3px;
+      aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+    }
+    .placeholder-card span { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(42,42,40,0.3); }
+    footer {
+      background: var(--charcoal); padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-built { font-size: 0.68rem; letter-spacing: 0.1em; color: rgba(232,220,200,0.35); }
+    .footer-location {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.68rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(232,220,200,0.4);
+    }
+    .footer-dot {
+      width: 7px; height: 7px; background: var(--moss);
+      border-radius: 50%; box-shadow: 0 0 6px var(--moss);
+      animation: pulse-dot 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--moss); }
+      50%       { opacity: 0.5; box-shadow: 0 0 2px var(--moss); }
+    }
+  </style>
+</head><body>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="homepage.html">Work</a></li>
+      <li><a href="architecture.html">Architecture</a></li>
+      <li><a href="graphics.html">Graphics</a></li>
+      <li><a href="apparel.html">Apparel</a></li>
+      <li><a href="photography.html" class="active">Photography</a></li>
+      <li><a href="cooking.html">Cooking</a></li>
+      <li><a href="downloads.html">Downloads</a></li>
+      <li><a href="#" class="nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <p class="page-eyebrow">Discipline 04</p>
+    <h1 class="page-title"><em>Photo</em>graphy</h1>
+    <p class="page-desc">Stills from the field — architecture, food, travel, and the in-between moments worth keeping.</p>
+  </div>
+
+  <section class="gallery-section">
+    <div class="placeholder-grid">
+      <div class="placeholder-card"><span>Coming Soon</span></div>
+      <div class="placeholder-card"><span>Coming Soon</span></div>
+      <div class="placeholder-card"><span>Coming Soon</span></div>
+      <div class="placeholder-card"><span>Coming Soon</span></div>
+      <div class="placeholder-card"><span>Coming Soon</span></div>
+      <div class="placeholder-card"><span>Coming Soon</span></div>
+      <div class="placeholder-card"><span>Coming Soon</span></div>
+      <div class="placeholder-card"><span>Coming Soon</span></div>
+      <div class="placeholder-card"><span>Coming Soon</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-built">Built with Claude Code &amp; curiosity</span>
+    <div class="footer-location">
+      <span class="footer-dot"></span>
+      <span>Atlanta, GA</span>
+    </div>
+  </footer>
+
+</body></html>

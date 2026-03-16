@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filter Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 32px;
+      background: #1a1a1a;
+      font-family: monospace;
+      color: #ccc;
+    }
+
+    h1 {
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 28px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .item img {
+      width: 100%;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .label {
+      font-size: 0.72rem;
+      line-height: 1.6;
+      color: #888;
+    }
+
+    .label strong {
+      display: block;
+      font-size: 0.8rem;
+      color: #ddd;
+      margin-bottom: 4px;
+    }
+
+    .f1 { filter: none; }
+    .f2 { filter: sepia(0.4) saturate(0.85) brightness(0.95) hue-rotate(5deg); }
+    .f3 { filter: sepia(0.6) saturate(0.7) brightness(0.9) hue-rotate(15deg) contrast(1.05); }
+    .f4 { filter: sepia(0.3) saturate(1.1) brightness(0.92) hue-rotate(-10deg) contrast(1.08); }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Filter Comparison — AMBANI_-C1.png</h1>
+
+  <div class="grid">
+
+    <div class="item">
+      <img class="f1" src="file:///C:/Users/tmstn/Pictures/AMBANI_-C1.png" alt="Original" />
+      <div class="label">
+        <strong>1 — Original</strong>
+        filter: none
+      </div>
+    </div>
+
+    <div class="item">
+      <img class="f2" src="file:///C:/Users/tmstn/Pictures/AMBANI_-C1.png" alt="Filter 2" />
+      <div class="label">
+        <strong>2 — Warm Muted</strong>
+        sepia(0.4) saturate(0.85)<br>brightness(0.95) hue-rotate(5deg)
+      </div>
+    </div>
+
+    <div class="item">
+      <img class="f3" src="file:///C:/Users/tmstn/Pictures/AMBANI_-C1.png" alt="Filter 3" />
+      <div class="label">
+        <strong>3 — Deep Sepia</strong>
+        sepia(0.6) saturate(0.7)<br>brightness(0.9) hue-rotate(15deg)<br>contrast(1.05)
+      </div>
+    </div>
+
+    <div class="item">
+      <img class="f4" src="file:///C:/Users/tmstn/Pictures/AMBANI_-C1.png" alt="Filter 4" />
+      <div class="label">
+        <strong>4 — Cool Earthy</strong>
+        sepia(0.3) saturate(1.1)<br>brightness(0.92) hue-rotate(-10deg)<br>contrast(1.08)
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

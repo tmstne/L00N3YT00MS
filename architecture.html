@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --linen:   #F2EDE4;
+      --charcoal:#2A2A28;
+      --green:   #2C3B2D;
+      --corten:  #C4724A;
+      --beige:   #E8DCC8;
+      --moss:    #7A9E5C;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--linen); color: var(--charcoal); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.6rem;
+      color: var(--beige);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(242,237,228,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--beige); }
+    .nav-links a.active { color: var(--beige); }
+
+    .nav-contact {
+      background: var(--beige);
+      color: var(--charcoal) !important;
+      padding: 6px 18px;
+      border-radius: 2px;
+      font-weight: 600 !important;
+    }
+
+    .nav-contact:hover { background: var(--corten); color: var(--beige) !important; }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--charcoal);
+      padding: 80px 64px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/homepage_lego_pattern_001.png');
+      background-size: 300px;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .page-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--moss);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.0;
+      color: var(--beige);
+      letter-spacing: -0.01em;
+    }
+
+    .page-title em {
+      font-style: italic;
+      color: var(--corten);
+    }
+
+    .page-desc {
+      margin-top: 24px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(232,220,200,0.55);
+      max-width: 480px;
+      font-weight: 300;
+    }
+
+    /* GALLERY */
+    .gallery {
+      padding: 80px 48px;
+    }
+
+    .gallery-grid {
+      columns: 3;
+      column-gap: 16px;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.03); }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--beige);
+      opacity: 0.7;
+    }
+
+    .footer-built {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,220,200,0.3);
+    }
+
+    .footer-location {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,220,200,0.4);
+    }
+
+    .footer-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--moss);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="homepage.html">Work</a></li>
+      <li><a href="architecture.html">Architecture</a></li>
+      <li><a href="graphics.html">Graphics</a></li>
+      <li><a href="apparel.html">Apparel</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="cooking.html">Cooking</a></li>
+      <li><a href="downloads.html">Downloads</a></li>
+      <li><a href="#" class="nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <p class="page-eyebrow">Discipline 01</p>
+    <h1 class="page-title">Archi<em>tecture</em></h1>
+    <p class="page-desc">Residential and commercial projects spanning concept to construction documentation. Trained in the discipline, obsessed with detail.</p>
+  </header>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/arch/04676_000_N436_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N455_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N461_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N473_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N476_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04676_000_N493_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N185_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N186_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N187_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N188_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/04750_000_N190_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N103_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N68_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N69_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N86_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N91_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/05216_000_N99_medium.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/AMBANI -C1.png" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/AMBANI -C4.png" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/arch/AMBANI -C5.png" alt="" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo"></span>
+    <span class="footer-built">Built with Claude Code &amp; curiosity</span>
+    <div class="footer-location">
+      <span class="footer-dot"></span>
+      <span>Atlanta, GA</span>
+    </div>
+  </footer>
+
+</body>
+</html>
