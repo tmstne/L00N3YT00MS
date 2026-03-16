@@ -37,52 +37,49 @@
       padding: 6px 18px; border-radius: 2px; font-weight: 600 !important;
     }
     .nav-contact:hover { background: var(--corten); color: var(--beige) !important; }
-    .page-hero {
-      background: var(--charcoal); padding: 80px 48px 60px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+    .page-header {
+      background: var(--charcoal); padding: 80px 64px 60px;
+      position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: url('images/homepage_lego_pattern_001.png');
+      background-size: 300px; opacity: 0.04; pointer-events: none;
     }
     .page-eyebrow {
-      font-size: 0.68rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--moss);
-      font-weight: 500; margin-bottom: 16px;
+      font-size: 0.7rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--moss); font-weight: 500; margin-bottom: 16px;
     }
     .page-title {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-size: clamp(3rem, 6vw, 6rem);
-      line-height: 1.05; color: var(--beige); letter-spacing: -0.01em;
+      font-weight: 300; font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.0; color: var(--beige); letter-spacing: -0.01em;
     }
     .page-title em { font-style: italic; color: var(--corten); }
     .page-desc {
-      margin-top: 24px; font-size: 0.88rem; line-height: 1.75;
+      margin-top: 24px; font-size: 0.9rem; line-height: 1.7;
       color: rgba(232,220,200,0.55); max-width: 480px; font-weight: 300;
     }
-    .gallery-section { padding: 80px 48px; background: var(--linen); }
-    .placeholder-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .placeholder-card {
-      background: var(--beige); border-radius: 3px;
-      aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
-    }
-    .placeholder-card span { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(42,42,40,0.3); }
+    .gallery { padding: 80px 48px; }
+    .gallery-grid { columns: 3; column-gap: 16px; }
+    .gallery-item { break-inside: avoid; margin-bottom: 16px; overflow: hidden; border-radius: 2px; }
+    .gallery-item img { width: 100%; display: block; transition: transform 0.4s ease; }
+    .gallery-item:hover img { transform: scale(1.03); }
     footer {
-      background: var(--charcoal); padding: 28px 48px;
+      background: var(--charcoal); height: 64px;
       display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 0 48px; border-top: 1px solid rgba(255,255,255,0.06);
     }
-    .footer-built { font-size: 0.68rem; letter-spacing: 0.1em; color: rgba(232,220,200,0.35); }
+    .footer-built { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,220,200,0.3); }
     .footer-location {
       display: flex; align-items: center; gap: 8px;
-      font-size: 0.68rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: rgba(232,220,200,0.4);
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,220,200,0.4);
     }
     .footer-dot {
-      width: 7px; height: 7px; background: var(--moss);
-      border-radius: 50%; box-shadow: 0 0 6px var(--moss);
-      animation: pulse-dot 2.5s ease-in-out infinite;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--moss); animation: pulse-dot 2s ease-in-out infinite;
     }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--moss); }
-      50%       { opacity: 0.5; box-shadow: 0 0 2px var(--moss); }
-    }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
   </style>
 </head><body>
 
@@ -99,23 +96,74 @@
     </ul>
   </nav>
 
-  <div class="page-hero">
+  <header class="page-header">
     <p class="page-eyebrow">Discipline 04</p>
     <h1 class="page-title"><em>Photo</em>graphy</h1>
     <p class="page-desc">Stills from the field — architecture, food, travel, and the in-between moments worth keeping.</p>
-  </div>
+  </header>
 
-  <section class="gallery-section">
-    <div class="placeholder-grid">
-      <div class="placeholder-card"><span>Coming Soon</span></div>
-      <div class="placeholder-card"><span>Coming Soon</span></div>
-      <div class="placeholder-card"><span>Coming Soon</span></div>
-      <div class="placeholder-card"><span>Coming Soon</span></div>
-      <div class="placeholder-card"><span>Coming Soon</span></div>
-      <div class="placeholder-card"><span>Coming Soon</span></div>
-      <div class="placeholder-card"><span>Coming Soon</span></div>
-      <div class="placeholder-card"><span>Coming Soon</span></div>
-      <div class="placeholder-card"><span>Coming Soon</span></div>
+  <section class="gallery">
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/photography/L mall.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/Luzern Panorama2.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/Zurich Panorama1.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/accordian.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/bell tower.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/bern pan.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/breg museum.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/bregenz boats.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/bridge bar.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/broken glass.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/cacti window.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/car n liz mts.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/carrara opening.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/cathedral door.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/cathedral interior.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/cats poster.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/chapel.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/colloseum.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/column.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/coy pond.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/coy pond2.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/david.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/door.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/duomo view.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/fire house.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/fountain.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/friends.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/glass bottle.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/glass insulator.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/gubbio view.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/hadrians villa fence.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/hadrians villa view.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/joint.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/la t dining room.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/lausanne Panorama2.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/leaves.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/luzern cathedral.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/macro exhibit.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/marble view.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/metal strands.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/metal struts.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/mts.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/palatine ruins lookout.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/palatine ruins.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/pantheon dome.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/pulley view.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/rome escalator.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/ronchamp corner.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/sanaa table.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/solo gate.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/statue reach.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/vactican view.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/vein exhibit.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/violin sculpture.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/vitra interior.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/vitra light.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/vitra stair.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/wall cheak.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/windmill.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="images/photography/zaha cantilever.jpg" alt="" loading="lazy" /></div>
     </div>
   </section>
 
