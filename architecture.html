@@ -200,6 +200,26 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
     }
+
+    .gallery-item {
+      position: relative;
+    }
+
+    .gallery-item::after {
+      content: 'PROPERTY OF TVSDESIGN — REFERENCE WORK AS AN EMPLOYEE';
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      font-size: 0.45rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.45);
+      padding: 3px 6px;
+      border-radius: 2px;
+      pointer-events: none;
+      line-height: 1.4;
+    }
   </style>
 </head>
 <body>
