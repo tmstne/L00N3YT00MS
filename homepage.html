@@ -697,6 +697,142 @@
       text-transform: uppercase;
       color: rgba(42,42,40,0.25);
     }
+
+    @media (max-width: 768px) {
+
+      /* NAV */
+      nav {
+        padding: 0 20px;
+        overflow-x: auto;
+      }
+      .nav-links {
+        gap: 20px;
+      }
+      .nav-links a {
+        font-size: 0.62rem;
+      }
+
+      /* HERO */
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-left {
+        padding: 48px 24px;
+      }
+      .hero-right {
+        height: 50vw;
+        min-height: 260px;
+      }
+      .hero-headline {
+        font-size: clamp(2.8rem, 10vw, 4rem);
+      }
+      .hero-headline-wrap {
+        flex-direction: row;
+        align-items: center;
+      }
+      .hero-left-brain {
+        width: clamp(80px, 22vw, 140px);
+      }
+      .hero-cta-row {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 32px;
+      }
+      .btn-primary, .btn-ghost {
+        text-align: center;
+      }
+      .hero-stats {
+        gap: 24px;
+        margin-top: 32px;
+      }
+
+      /* DISCIPLINES */
+      .disciplines {
+        padding: 60px 24px;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .card {
+        min-height: 260px;
+      }
+
+      /* FEATURED */
+      .featured {
+        grid-template-columns: 1fr;
+        padding: 60px 24px;
+        gap: 40px;
+      }
+
+      /* ARCHITECTURE */
+      .architecture {
+        padding: 60px 24px;
+      }
+      .arch-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      /* GALLERY */
+      .gallery {
+        padding: 60px 24px;
+      }
+      .gallery-grid {
+        columns: 2;
+        column-gap: 10px;
+      }
+
+      /* PATTERN DIVIDER */
+      .pattern-divider {
+        height: 60px;
+      }
+
+      /* ABOUT */
+      .about-strip {
+        grid-template-columns: 1fr;
+        padding: 60px 24px;
+        gap: 40px;
+      }
+      .about-brain img {
+        width: min(240px, 70%);
+      }
+
+      /* SECTION HEADER */
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+
+      /* FOOTER */
+      footer {
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-grid {
+        columns: 1;
+      }
+      .nav-links a {
+        font-size: 0.58rem;
+        letter-spacing: 0.08em;
+      }
+      .nav-links {
+        gap: 14px;
+      }
+    }
   </style>
 </head>
 <body>
